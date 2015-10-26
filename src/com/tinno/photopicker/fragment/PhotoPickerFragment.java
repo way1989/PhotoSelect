@@ -1,20 +1,9 @@
 package com.tinno.photopicker.fragment;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.ListPopupWindow;
-import android.support.v7.widget.OrientationHelper;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Button;
+import static android.app.Activity.RESULT_OK;
+import static com.tinno.photopicker.PhotoPickerActivity.EXTRA_SHOW_GIF;
+import static com.tinno.photopicker.utils.MediaStoreHelper.INDEX_ALL_PHOTOS;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +18,23 @@ import com.tinno.photopicker.event.OnPhotoClickListener;
 import com.tinno.photopicker.utils.ImageCaptureManager;
 import com.tinno.photopicker.utils.MediaStoreHelper;
 
-import static android.app.Activity.RESULT_OK;
-import static com.tinno.photopicker.PhotoPickerActivity.EXTRA_SHOW_GIF;
-import static com.tinno.photopicker.utils.MediaStoreHelper.INDEX_ALL_PHOTOS;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBar.OnNavigationListener;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.ListPopupWindow;
+import android.support.v7.widget.OrientationHelper;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
 
 /**
  * Created by donglua on 15/5/31.
@@ -67,6 +70,28 @@ public class PhotoPickerFragment extends Fragment {
           }
         });
   }
+  @Override
+	public void onResume() {
+		super.onResume();
+	    ActionBar actionBar = ((PhotoPickerActivity) getActivity()).getSupportActionBar();
+	    assert actionBar != null;
+	    if(actionBar != null)
+	    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+	    actionBar.setListNavigationCallbacks(listAdapter, new OnNavigationListener() {
+			
+			@Override
+			public boolean onNavigationItemSelected(int itemPosition, long itemId) {
+				// TODO Auto-generated method stub
+		        PhotoDirectory directory = directories.get(itemPosition);
+
+		        //btSwitchDirectory.setText(directory.getName());
+
+		        photoGridAdapter.setCurrentDirectoryIndex(itemPosition);
+		        photoGridAdapter.notifyDataSetChanged();
+				return true;
+			}
+		});
+	}
 
 
   @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,

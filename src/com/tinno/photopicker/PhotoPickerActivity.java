@@ -51,13 +51,13 @@ public class PhotoPickerActivity extends AppCompatActivity {
     setContentView(R.layout.activity_photo_picker);
 
     Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-    mToolbar.setTitle(R.string.images);
+    mToolbar.setTitle("");
     setSupportActionBar(mToolbar);
 
     ActionBar actionBar = getSupportActionBar();
-
     assert actionBar != null;
     actionBar.setDisplayHomeAsUpEnabled(true);
+    
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
       actionBar.setElevation(25);
@@ -94,7 +94,6 @@ public class PhotoPickerActivity extends AppCompatActivity {
         return true;
       }
     });
-
   }
 
 
