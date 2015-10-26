@@ -91,7 +91,8 @@ public class PhotoGridAdapter extends SelectableAdapter<PhotoGridAdapter.PhotoVi
       final boolean isChecked = isSelected(photo);
 
       holder.vSelected.setSelected(isChecked);
-      holder.ivPhoto.setSelected(isChecked);
+      //holder.ivPhoto.setSelected(isChecked);
+      holder.ivPhotoCover.setAlpha(isChecked ? 0.3f : 0f);
 
       holder.ivPhoto.setOnClickListener(new View.OnClickListener() {
         @Override public void onClick(View view) {
@@ -134,11 +135,13 @@ public class PhotoGridAdapter extends SelectableAdapter<PhotoGridAdapter.PhotoVi
 
   public static class PhotoViewHolder extends RecyclerView.ViewHolder {
     private ImageView ivPhoto;
+    private View ivPhotoCover;
     private View vSelected;
 
     public PhotoViewHolder(View itemView) {
       super(itemView);
       ivPhoto   = (ImageView) itemView.findViewById(R.id.iv_photo);
+      ivPhotoCover = itemView.findViewById(R.id.iv_photo_select);
       vSelected = itemView.findViewById(R.id.v_selected);
     }
   }

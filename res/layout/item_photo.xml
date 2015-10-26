@@ -12,7 +12,16 @@
         android:background="@drawable/photo_bg"
         android:padding="1dip"
         android:scaleType="centerCrop" />
-
+    <ImageView
+        android:id="@+id/iv_photo_select"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:background="@color/accent"
+        android:padding="1dip"
+        android:alpha="0"
+         />
     <ImageView
         android:id="@+id/v_selected"
         android:layout_width="wrap_content"
